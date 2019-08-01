@@ -1,0 +1,40 @@
+{
+  "name": "poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "babel-node index.js",
+  "scripts": {
+    "build": "rm -rf ./build && ./node_modules/.bin/babel ./src -d ./dist --source-maps --copy-files",
+    "start": "node ./dist/index.js",
+    "dev": "yarn build && yarn start",
+    "lint": "./node_modules/.bin/eslint ./src"
+  },
+  "engines": {
+    "node": "10.15.3"
+  },
+  "author": "Christian Rich",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-stage-3": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^7.2.3",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-html-reporter": "^0.5.2",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "express": "^4.15.3",
+    "handlebars": "^4.1.2",
+    "puppeteer": "^1.19.0"
+  }
+}

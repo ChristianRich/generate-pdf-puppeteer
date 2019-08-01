@@ -1,2 +1,7 @@
-# generate-pdf-puppeteer
-Generate a PDF with Puppeteer, Handlebars and Express
+# Puppeteer PDF generation
+
+
+```
+yarn
+yarn dev
+```
