@@ -41,7 +41,9 @@ export default class GeneratePDF {
       waitUntil: 'networkidle2',
     })
 
-    await page.pdf(options)
+    const buffer = await page.pdf(options)
     await browser.close()
+
+    return buffer.toString('base64')
   }
 }
