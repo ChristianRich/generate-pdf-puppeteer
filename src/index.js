@@ -1,14 +1,24 @@
 import 'babel-polyfill'
-import express from 'express'
+import PDFGenerator from './services/pdf-generator'
 import path from 'path'
-import GeneratePDF from './generate-pdf'
+;(async () => {
+  const generator = new PDFGenerator()
 
-const app = express()
-app.use(express.static(path.join(__dirname, 'static')))
+  // Compile a Handlebars HTML template
+  const html = generator.compileHTML(
+    path.join(process.cwd(), 'static/invoice.html'),
+    {
+      name: 'Rodolfo Luis Marcos',
+    }
+  )
 
-const server = app.listen(3000, async () => {
-  const generator = new GeneratePDF()
-  const base64 = await generator.run()
-  console.log(base64) // The base 64 string going into e.g an email attachment
-  server.close()
-})
+  // Generate a PDF as buffer using the HTML template
+  const buffer = await generator.create({
+    html,
+  })
+
+  // Convert the buffer the base64 for email attachment
+  const base64 = buffer.toString('base64')
+
+  console.log(base64)
+})()
