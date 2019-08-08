@@ -12,12 +12,12 @@ import path from 'path'
     }
   )
 
-  // Generate a PDF as buffer using the HTML template
+  // Generate the PDF as buffer
   const buffer = await generator.create({
     html,
   })
 
-  // Convert the buffer the base64 for email attachment
+  // Get a Base64 encoded string from the buffer for email attachment
   const base64 = buffer.toString('base64')
 
   console.log(base64)

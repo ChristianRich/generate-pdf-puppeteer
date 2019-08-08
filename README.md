@@ -1,4 +1,4 @@
-# Puppeteer PDF generation from HTML using Handlebars
+# PDF generation from HTML using Puppeteer and Handlebars
 
 
 ```
