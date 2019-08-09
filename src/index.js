@@ -8,7 +8,8 @@ import path from 'path'
   const html = generator.compileHTML(
     path.join(process.cwd(), 'static/invoice.html'),
     {
-      name: 'Rodolfo Luis Marcos',
+      orderRefNumber: '123456789',
+      orderDate: '14 December 2019',
     }
   )
 
@@ -19,6 +20,5 @@ import path from 'path'
 
   // Get a Base64 encoded string from the buffer for email attachment
   const base64 = buffer.toString('base64')
-
   console.log(base64)
 })()

@@ -1,35 +1,22 @@
 import fs from 'fs'
-import path from 'path'
 import puppeteer from 'puppeteer'
 import handlebars from 'handlebars'
-import express from 'express'
 
+// https://github.com/GoogleChrome/puppeteer/blob/v1.19.0/docs/api.md#pagepdfoptions
 const DEFAULT_OPTIONS = {
   format: 'A4',
-  headerTemplate: '<p></p>',
-  footerTemplate: '<p></p>',
   displayHeaderFooter: false,
   margin: {
     top: '40px',
-    bottom: '100px',
+    right: '40px',
+    bottom: '40px',
+    left: '40px',
   },
-  printBackground: true,
+  printBackground: false,
+  path: 'output.pdf',
 }
 
-const DEFAULT_STATIC_PATH = path.join(__dirname, '../static')
-
 export default class GeneratePDF {
-  /**
-   * Serves up static assets for the PDF. Puppeteer does not support local file paths.
-   */
-  async startServer(staticPath) {
-    return new Promise(resolve => {
-      const app = express()
-      app.use(express.static(staticPath))
-      const server = app.listen(3000, async () => resolve(server))
-    })
-  }
-
   /**
    * Compiles a Handlebars HTML template
    */
@@ -42,13 +29,7 @@ export default class GeneratePDF {
   /**
    * Generates a PDF and returns a buffer
    */
-  async create({
-    html,
-    options = DEFAULT_OPTIONS,
-    staticPath = DEFAULT_STATIC_PATH,
-  }) {
-    const server = await this.startServer(staticPath)
-
+  async create({ html, options = DEFAULT_OPTIONS }) {
     const browser = await puppeteer.launch({
       args: ['--no-sandbox'],
       headless: true,
@@ -62,8 +43,6 @@ export default class GeneratePDF {
 
     const buffer = await page.pdf(options)
     await browser.close()
-    server.close()
-
     return buffer
   }
 }
