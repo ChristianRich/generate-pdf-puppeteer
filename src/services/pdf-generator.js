@@ -1,5 +1,5 @@
 import fs from 'fs'
-import puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer-core'
 import handlebars from 'handlebars'
 
 // https://github.com/GoogleChrome/puppeteer/blob/v1.19.0/docs/api.md#pagepdfoptions
@@ -30,10 +30,26 @@ export default class GeneratePDF {
    * Generates a PDF and returns a buffer
    */
   async create({ html, options = DEFAULT_OPTIONS }) {
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox'],
-      headless: true,
+    const browser = await puppeteer.connect({
+      browserURL: 'http://0.0.0.0:4444/wd/hub',
+      // browserWSEndpoint: 'ws://0.0.0.0:4444',
+      // transport: undefined,
+      ignoreHTTPSErrors: true,
     })
+
+    // const browser = await puppeteer.launch({
+    //   args: [
+    //     '--headless',
+    //     '--no-sandbox',
+    //     '--disable-gpu',
+    //     '--privileged',
+    //     '--window-size=2400,1239',
+    //   ],
+    //   headless: true,
+    //   executablePath: 'http://0.0.0.0:4444/wd/hub',
+    //   // executablePath:
+    //   //   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    // })
 
     const page = await browser.newPage()
 
