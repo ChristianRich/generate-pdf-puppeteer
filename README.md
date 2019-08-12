@@ -10,6 +10,7 @@ yarn dev
 ### Puppeteer-core branch using a Dockerized version of headless Chrome
 
 ```
+git checkout puppeteer-core
 docker pull browserless/chrome
 ```
 
