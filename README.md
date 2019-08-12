@@ -11,7 +11,16 @@ yarn dev
 
 ```
 docker pull browserless/chrome
-docker run -d -p 3000:3000 browserless/chrome
+```
+
+Start container:
+```
+docker run -d -p 4444:3000 browserless/chrome
+```
+
+Or use Docker compose:
+```
+docker-compose up -d
 ```
 
 ```

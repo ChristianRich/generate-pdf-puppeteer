@@ -2,6 +2,8 @@ import fs from 'fs'
 import puppeteer from 'puppeteer-core'
 import handlebars from 'handlebars'
 
+const DEFAULT_SOCKET = 'ws://localhost:4444'
+
 // https://github.com/GoogleChrome/puppeteer/blob/v1.19.0/docs/api.md#pagepdfoptions
 const DEFAULT_OPTIONS = {
   format: 'A4',
@@ -28,10 +30,12 @@ export default class GeneratePDF {
 
   /**
    * Generates a PDF and returns a buffer
+   * https://www.npmjs.com/package/puppeteer-core
+   * https://docs.browserless.io/docs/puppeteer-library.html
    */
   async create({ html, options = DEFAULT_OPTIONS }) {
     const browser = await puppeteer.connect({
-      browserWSEndpoint: 'ws://localhost:3000',
+      browserWSEndpoint: `${DEFAULT_SOCKET}`,
       ignoreHTTPSErrors: true,
     })
 

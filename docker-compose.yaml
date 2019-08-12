@@ -1,0 +1,10 @@
+version: "2"
+services:
+  chrome:
+    image: browserless/chrome
+    ports:
+      - 4444:4444/tcp
+    environment:
+      - PORT=4444
+      - SHM_SIZE=256m
+    restart: on-failure
