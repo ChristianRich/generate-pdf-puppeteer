@@ -31,25 +31,9 @@ export default class GeneratePDF {
    */
   async create({ html, options = DEFAULT_OPTIONS }) {
     const browser = await puppeteer.connect({
-      browserURL: 'http://0.0.0.0:4444/wd/hub',
-      // browserWSEndpoint: 'ws://0.0.0.0:4444',
-      // transport: undefined,
+      browserWSEndpoint: 'ws://localhost:3000',
       ignoreHTTPSErrors: true,
     })
-
-    // const browser = await puppeteer.launch({
-    //   args: [
-    //     '--headless',
-    //     '--no-sandbox',
-    //     '--disable-gpu',
-    //     '--privileged',
-    //     '--window-size=2400,1239',
-    //   ],
-    //   headless: true,
-    //   executablePath: 'http://0.0.0.0:4444/wd/hub',
-    //   // executablePath:
-    //   //   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-    // })
 
     const page = await browser.newPage()
 
